@@ -1,0 +1,122 @@
+
+// register user 
+
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username": "Daveed",
+    "password":"Daveed@2021"
+}
+
+###
+// login user
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "Daveed",
+    "password":"Daveed@2021"
+
+}
+
+
+### 
+// create a post 
+POST http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+Content-Type: application/json
+
+{
+    "title": "My First Post",
+    "description": "This is my first blog post.",
+    "image":"https://images.pexels.com/photos/26455238/pexels-photo-26455238/free-photo-of-underwater-photo-of-a-shark.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    
+}
+
+###
+
+// get all posts
+
+GET http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+
+###
+
+// get a single post
+
+GET http://localhost:3000/posts/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+
+### 
+
+// update a post
+
+PUT http://localhost:3000/posts/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+Content-Type: application/json
+
+{
+    "title": "Updated Post",
+    "description": "This is my updated blog post.",
+    "image":"https://images.pexels.com/photos/26455238/pexels-photo-26455238/free-photo-of-underwater-photo-of-a-shark.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+}
+
+###
+// delete a post
+
+DELETE http://localhost:3000/posts/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+
+
+### 
+
+// upate comments show on post
+PUT http://localhost:3000/showcomments/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+Content-Type: application/json
+
+###
+
+// update hide comments on post 
+
+PUT http://localhost:3000/hidecomments/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+Content-Type: application/json
+
+###
+
+
+// get my posts 
+
+GET http://localhost:3000/getmyposts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+
+###
+
+// create a comment 
+
+POST http://localhost:3000/addcomment/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+Content-Type: application/json
+
+{
+    "content": "This is a comment."
+}
+
+###
+
+// delete a comment
+
+DELETE http://localhost:3000/deletecomment/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+
+###
+
+// get all comments on a post
+
+GET http://localhost:3000/getcomments/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhdmVlZCIsImlkIjoxLCJpYXQiOjE3MjQ0OTMzNjB9.V4jZg5VaM1KwtuLxBLrjZUKnQKwqRnpLbE7VhvLSCG0
+
+
