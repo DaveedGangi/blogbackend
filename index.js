@@ -47,6 +47,8 @@ const initializeDbAndServer = async () => {
         datetime TEXT,
         commentshow INTEGER DEFAULT 0,
         user_id INTEGER,
+        username TEXT,
+        FOREIGN KEY(username) REFERENCES users (username),
         FOREIGN KEY(user_id) REFERENCES users(id)
       )`
     );
@@ -59,6 +61,8 @@ const initializeDbAndServer = async () => {
         content TEXT,
         datetime TEXT,
         user_id INTEGER,
+        username TEXT,
+        FOREIGN KEY(username) REFERENCES users (username),
         FOREIGN KEY(post_id) REFERENCES posts(id),
         FOREIGN KEY(user_id) REFERENCES users(id)
       )`
@@ -154,17 +158,22 @@ app.post("/register", async (request, response) => {
   
   app.post("/posts",verifyToken, async (request, response) => {
     const { title, description, image} = request.body;
+    const getUserQuery=`SELECT username FROM users WHERE id=${request.userId}`;
+    const user=await db.get(getUserQuery);
+
     const datetime = new Date().toISOString();
+
     const createPostQuery = `
        INSERT INTO
-        posts (title, description, image, datetime,user_id)
+        posts (title, description, image, datetime,user_id,username)
        VALUES
         (
          '${title}',
          '${description}',
          '${image}',
          '${datetime}',
-          ${request.userId}
+          ${request.userId},
+          '${user.username}'
         );`;
       await db.run(createPostQuery);
       response.send({message:"Post created successfully"});
@@ -218,17 +227,22 @@ app.post("/register", async (request, response) => {
   // add comment to a post
   app.post("/addcomment/:id",verifyToken, async (request, response) => {
     const { content } = request.body;
+
+    const getUserQuery=`SELECT username FROM users WHERE id=${request.userId}`;
+    const user=await db.get(getUserQuery);
+    
     const { id } = request.params;
     const datetime = new Date().toISOString();
     const addCommentQuery = `
        INSERT INTO
-        comments (post_id, content, datetime,user_id)
+        comments (post_id, content, datetime,user_id,username)
        VALUES
         (
          ${id},
          '${content}',
          '${datetime}',
-         ${request.userId}
+         ${request.userId},
+         '${user.username}'
         );`;
       await db.run(addCommentQuery);
       response.send({message:"Comment added successfully"});
@@ -302,3 +316,14 @@ app.post("/register", async (request, response) => {
       await db.run(updateCommentShowQuery);
       response.send({message:"Comment show status updated successfully"});
     });
+
+
+
+// get the usename based on use id 
+  
+  app.get("/getusername/:id",verifyToken, async (request, response) => {
+    const { id } = request.params;
+    const getUsernameQuery = `SELECT username FROM users WHERE id = ${id}`;
+    const username = await db.get(getUsernameQuery);
+    response.send(username);
+  });
