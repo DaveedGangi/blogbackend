@@ -1,0 +1,32 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables (VERY IMPORTANT)
+.env
+.env.local
+.env.*.local
+
+# Logs & cache
+logs/
+*.log
+.cache/
+
+# Build files
+dist/
+build/
+
+# SQLite database (if used)
+*.sqlite
+*.sqlite3
+
+# Editor-specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Debugging files
+*.swp
+*.swo
