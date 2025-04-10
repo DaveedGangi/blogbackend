@@ -260,7 +260,7 @@ app.post("/register", async (request, response) => {
     const postOwnerQuery = `SELECT user_id FROM posts WHERE id = ?`;
     const post = await db.get(postOwnerQuery, [id]);
    
-    if(!post || post.user_id !==request.userId){
+    if(!post || Number(post.user_id) !==Number(request.userId)){
       response.status(401).send({errorMessage:"Unauthorized to delete this post"});
       return;
     }
